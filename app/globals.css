@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Brand palette */
+  --color-navy: #183860;
+  --color-navy-light: #24507f;
+  --color-pink: #c82870;
+  --color-pink-light: #e5488f;
+  --color-ink: #0b1b2e;
+  --color-mist: #f7f8fa;
+
+  /* Semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Clash Display', var(--font-inter), ui-sans-serif, sans-serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.75rem;
+
+  --background: #0b1b2e;
+  --foreground: #f7f8fa;
+
+  --card: #10233a;
+  --card-foreground: #f7f8fa;
+
+  --popover: #10233a;
+  --popover-foreground: #f7f8fa;
+
+  --primary: #c82870;
+  --primary-foreground: #ffffff;
+
+  --secondary: #183860;
+  --secondary-foreground: #f7f8fa;
+
+  --muted: #16304d;
+  --muted-foreground: #9fb2ca;
+
+  --accent: #c82870;
+  --accent-foreground: #ffffff;
+
+  --destructive: #e5484d;
+
+  --border: rgba(159, 178, 202, 0.14);
+  --input: rgba(159, 178, 202, 0.18);
+  --ring: #c82870;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  ::selection {
+    background: var(--color-pink);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  /* Frosted navy glass surface */
+  .glass {
+    background: rgba(24, 56, 96, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(159, 178, 202, 0.14);
+  }
+  .glass-strong {
+    background: rgba(11, 27, 46, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(159, 178, 202, 0.16);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, #f7f8fa 0%, #f7f8fa 40%, var(--color-pink-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Pink glow shadow for CTAs */
+  .glow-pink {
+    box-shadow: 0 10px 30px -8px rgba(200, 40, 112, 0.5);
+  }
+  .glow-pink-hover {
+    transition: box-shadow 260ms var(--ease-brand), transform 260ms var(--ease-brand);
+  }
+  .glow-pink-hover:hover {
+    box-shadow: 0 16px 44px -8px rgba(200, 40, 112, 0.65);
+    transform: translateY(-2px);
+  }
+  /* Animated gradient mesh */
+  .mesh-hero {
+    background:
+      radial-gradient(60% 60% at 20% 20%, rgba(200, 40, 112, 0.35) 0%, transparent 60%),
+      radial-gradient(50% 50% at 85% 30%, rgba(36, 80, 127, 0.55) 0%, transparent 60%),
+      radial-gradient(70% 70% at 60% 90%, rgba(200, 40, 112, 0.22) 0%, transparent 55%),
+      #0b1b2e;
+    background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+    animation: meshShift 18s var(--ease-brand) infinite alternate;
+  }
+  @keyframes meshShift {
+    0% {
+      background-position: 0% 0%, 100% 0%, 50% 100%, 0 0;
+    }
+    100% {
+      background-position: 40% 30%, 60% 40%, 30% 70%, 0 0;
+    }
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh-hero {
+    animation: none;
+  }
+}
