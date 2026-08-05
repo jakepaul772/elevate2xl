@@ -8,7 +8,8 @@ export async function POST(request) {
     const apiUser = process.env.FORUMPAY_API_USER;
     const apiSecret = process.env.FORUMPAY_API_SECRET;
 
-    const response = await fetch('https://dashboard.forumpay.com/api/v1/payment/create', {
+    // Updated endpoint path to ensure it hits the API gateway directly
+    const response = await fetch('https://forumpay.com/api/v1/payment/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,14 +27,13 @@ export async function POST(request) {
     try {
       resJson = JSON.parse(text);
     } catch {
-      resJson = { message: text };
+      return NextResponse.json({ error: `ForumPay returned HTML instead of JSON. Check API endpoint URL. Response preview: ${text.slice(0, 150)}` }, { status: 500 });
     }
 
     if (!response.ok) {
       return NextResponse.json({ error: resJson.message || resJson.error || 'ForumPay error' }, { status: response.status });
     }
 
-    // Check nested structures (e.g. resJson.data.url) as well as flat properties
     const paymentUrl = 
       resJson.payment_url || 
       resJson.url || 
@@ -44,7 +44,7 @@ export async function POST(request) {
 
     if (!paymentUrl) {
       return NextResponse.json({ 
-        error: `Could not find payment URL in ForumPay response. Keys found: ${JSON.stringify(resJson)}` 
+        error: `Could not find payment URL. Keys found: ${Object.keys(resJson).join(', ')}` 
       }, { status: 500 });
     }
 
