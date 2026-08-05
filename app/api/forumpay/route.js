@@ -21,10 +21,16 @@ export async function POST(request) {
       }),
     });
 
-    const data = await response.json();
+    const text = await response.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { message: text };
+    }
 
     if (!response.ok) {
-      return NextResponse.json({ error: data.message || 'ForumPay error' }, { status: response.status });
+      return NextResponse.json({ error: data.message || data.error || 'ForumPay error' }, { status: response.status });
     }
 
     return NextResponse.json({ success: true, paymentUrl: data.payment_url || data.url });
