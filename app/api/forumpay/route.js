@@ -13,12 +13,13 @@ export async function POST(request) {
     console.log("API Secret length:", apiSecret?.length, "(should be 60)");
     console.log("API Secret first 8 chars:", apiSecret?.substring(0, 8));
     console.log("API Secret last 8 chars:", apiSecret?.slice(-8));
-    const params = new URLSearchParams({
+   const params = new URLSearchParams({
       invoice_amount: String(amount),
       invoice_currency: currency,
       widget_type: '0',
       reference_no: orderId || String(Date.now()),
       secure_link: 'true',
+      payer_id: (orderId || String(Date.now())).replace(/[^A-Za-z0-9._-]/g, ''),
     });
     const response = await fetch('https://api.forumpay.com/pay/v2/CreatePaymentLink/', {
       method: 'POST',
