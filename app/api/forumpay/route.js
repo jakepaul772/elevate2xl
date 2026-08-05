@@ -22,18 +22,33 @@ export async function POST(request) {
     });
 
     const text = await response.text();
-    let data;
+    let resJson;
     try {
-      data = JSON.parse(text);
+      resJson = JSON.parse(text);
     } catch {
-      data = { message: text };
+      resJson = { message: text };
     }
 
     if (!response.ok) {
-      return NextResponse.json({ error: data.message || data.error || 'ForumPay error' }, { status: response.status });
+      return NextResponse.json({ error: resJson.message || resJson.error || 'ForumPay error' }, { status: response.status });
     }
 
-    return NextResponse.json({ success: true, paymentUrl: data.payment_url || data.url });
+    // Check nested structures (e.g. resJson.data.url) as well as flat properties
+    const paymentUrl = 
+      resJson.payment_url || 
+      resJson.url || 
+      resJson.redirect_url || 
+      resJson.paymentUrl ||
+      resJson?.data?.url ||
+      resJson?.data?.payment_url;
+
+    if (!paymentUrl) {
+      return NextResponse.json({ 
+        error: `Could not find payment URL in ForumPay response. Keys found: ${JSON.stringify(resJson)}` 
+      }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, paymentUrl });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
