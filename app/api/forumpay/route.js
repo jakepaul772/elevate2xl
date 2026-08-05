@@ -8,18 +8,22 @@ export async function POST(request) {
     const apiUser = process.env.FORUMPAY_API_USER;
     const apiSecret = process.env.FORUMPAY_API_SECRET;
 
-    // Updated endpoint path to ensure it hits the API gateway directly
-    const response = await fetch('https://forumpay.com/api/v1/payment/create', {
+    // ForumPay's Payment API base is https://api.forumpay.com/pay/v2/
+    // CreatePaymentLink returns a hosted checkout URL to redirect the customer to.
+    const params = new URLSearchParams({
+      invoice_amount: String(amount),
+      invoice_currency: currency,
+      widget_type: '0', // 0 = Payment only (you already collect shipping details yourself)
+      reference_no: orderId || String(Date.now()),
+    });
+
+    const response = await fetch('https://api.forumpay.com/pay/v2/CreatePaymentLink/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${apiUser}:${apiSecret}`).toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded', // ForumPay requires this, not JSON
+        Authorization: `Basic ${Buffer.from(`${apiUser}:${apiSecret}`).toString('base64')}`,
       },
-      body: JSON.stringify({
-        merchant_amount: amount,
-        merchant_currency: currency,
-        merchant_order_id: orderId,
-      }),
+      body: params.toString(),
     });
 
     const text = await response.text();
@@ -27,28 +31,25 @@ export async function POST(request) {
     try {
       resJson = JSON.parse(text);
     } catch {
-      return NextResponse.json({ error: `ForumPay returned HTML instead of JSON. Check API endpoint URL. Response preview: ${text.slice(0, 150)}` }, { status: 500 });
+      resJson = { raw: text };
     }
 
-    if (!response.ok) {
-      return NextResponse.json({ error: resJson.message || resJson.error || 'ForumPay error' }, { status: response.status });
+    if (!response.ok || resJson.err) {
+      // ForumPay's own error responses use an "err" field, not "message"/"error"
+      return NextResponse.json(
+        { error: resJson.err || `ForumPay error (status ${response.status})`, raw: resJson },
+        { status: response.status }
+      );
     }
 
-    const paymentUrl = 
-      resJson.payment_url || 
-      resJson.url || 
-      resJson.redirect_url || 
-      resJson.paymentUrl ||
-      resJson?.data?.url ||
-      resJson?.data?.payment_url;
-
-    if (!paymentUrl) {
-      return NextResponse.json({ 
-        error: `Could not find payment URL. Keys found: ${Object.keys(resJson).join(', ')}` 
-      }, { status: 500 });
+    if (!resJson.url) {
+      return NextResponse.json(
+        { error: `Could not find payment URL in ForumPay response. Full response: ${JSON.stringify(resJson)}` },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ success: true, paymentUrl });
+    return NextResponse.json({ success: true, paymentUrl: resJson.url });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
