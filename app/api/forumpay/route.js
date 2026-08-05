@@ -8,19 +8,22 @@ export async function POST(request) {
     const apiUser = process.env.FORUMPAY_API_USER;
     const apiSecret = process.env.FORUMPAY_API_SECRET;
 
-    // ForumPay's Payment API base is https://api.forumpay.com/pay/v2/
-    // CreatePaymentLink returns a hosted checkout URL to redirect the customer to.
+    // DEBUG: Check what Vercel is actually reading
+    console.log("API User length:", apiUser?.length);
+    console.log("API Secret length:", apiSecret?.length);
+    console.log("API Secret preview:", apiSecret?.substring(0, 5) + "..." + apiSecret?.slice(-5));
+
     const params = new URLSearchParams({
       invoice_amount: String(amount),
       invoice_currency: currency,
-      widget_type: '0', // 0 = Payment only (you already collect shipping details yourself)
+      widget_type: '0',
       reference_no: orderId || String(Date.now()),
     });
 
     const response = await fetch('https://api.forumpay.com/pay/v2/CreatePaymentLink/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded', // ForumPay requires this, not JSON
+        'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Basic ${Buffer.from(`${apiUser}:${apiSecret}`).toString('base64')}`,
       },
       body: params.toString(),
@@ -35,7 +38,6 @@ export async function POST(request) {
     }
 
     if (!response.ok || resJson.err) {
-      // ForumPay's own error responses use an "err" field, not "message"/"error"
       return NextResponse.json(
         { error: resJson.err || `ForumPay error (status ${response.status})`, raw: resJson },
         { status: response.status }
