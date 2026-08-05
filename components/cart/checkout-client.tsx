@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
 import { AnimatePresence, motion } from "motion/react"
-import { Minus, Plus, ShoppingBag, Trash2, Lock, CheckCircle2, Bitcoin } from "lucide-react"
+import { Minus, Plus, ShoppingBag, Trash2, Bitcoin } from "lucide-react"
 import { useCart } from "@/components/cart/cart-provider"
 import { formatPrice } from "@/lib/products"
 import { Button } from "@/components/ui/button"
@@ -15,74 +15,51 @@ const SHIPPING_FLAT = 12
 
 export function CheckoutClient() {
   const { detailed, subtotal, setQty, remove, clear, count } = useCart()
-  const [step, setStep] = useState<"cart" | "details" | "done">("cart")
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card")
+  const [step, setStep] = useState<"cart" | "details">("cart")
   const [loadingCrypto, setLoadingCrypto] = useState(false)
 
   const shipping = subtotal >= SHIPPING_THRESHOLD || subtotal === 0 ? 0 : SHIPPING_FLAT
   const tax = Math.round(subtotal * 0.07 * 100) / 100
   const total = subtotal + shipping + tax
 
-  async function placeOrder(e: React.FormEvent) {
+  async function handleCryptoCheckout(e: React.FormEvent) {
     e.preventDefault()
 
-    if (paymentMethod === "crypto") {
-      try {
-        setLoadingCrypto(true)
-        const response = await fetch('/api/forumpay', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: total,
-            currency: 'USD',
-            orderId: `ORD-${Date.now()}`
-          })
-        })
-
-        const data = await response.json()
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to initialize crypto payment')
-        }
-
-        if (data.paymentUrl) {
-          clear()
-          window.location.href = data.paymentUrl
-          return
-        }
-      } catch (err: any) {
-        alert(err.message || 'Error connecting to ForumPay')
-        setLoadingCrypto(false)
-        return
-      }
+    const form = document.querySelector("form")
+    if (form && !form.checkValidity()) {
+      form.reportValidity()
+      return
     }
 
-    setStep("done")
-    clear()
-  }
+    try {
+      setLoadingCrypto(true)
+      const response = await fetch('/api/forumpay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: total,
+          currency: 'USD',
+          orderId: `ORD-${Date.now()}`
+        })
+      })
 
-  if (step === "done") {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mx-auto max-w-xl rounded-3xl border border-border bg-card p-10 text-center"
-      >
-        <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-full bg-pink/15 text-pink">
-          <CheckCircle2 className="size-8" />
-        </div>
-        <h2 className="font-display text-3xl font-bold text-mist">Order confirmed</h2>
-        <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-          Thanks for your research order. A confirmation and tracking details are on the way to your inbox. This is a
-          demo checkout, so no payment was processed.
-        </p>
-        <Link href="/shop">
-          <Button size="lg" className="mt-7 font-semibold">
-            Continue browsing
-          </Button>
-        </Link>
-      </motion.div>
-    )
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to initialize crypto payment')
+      }
+
+      if (data.paymentUrl) {
+        clear()
+        window.location.href = data.paymentUrl
+        return
+      } else {
+        throw new Error('No payment URL returned from ForumPay')
+      }
+    } catch (err: any) {
+      alert(err.message || 'Error connecting to ForumPay')
+      setLoadingCrypto(false)
+    }
   }
 
   if (count === 0) {
@@ -175,7 +152,7 @@ export function CheckoutClient() {
               initial={{ opacity: 0, x: 12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -12 }}
-              onSubmit={placeOrder}
+              onSubmit={handleCryptoCheckout}
               className="space-y-6 rounded-2xl border border-border bg-card p-6"
             >
               <fieldset className="space-y-4">
@@ -193,49 +170,14 @@ export function CheckoutClient() {
                 </div>
               </fieldset>
 
-              <fieldset className="space-y-4">
-                <legend className="font-display text-lg font-semibold text-mist">Payment Method</legend>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div 
-                    onClick={() => setPaymentMethod("card")}
-                    className={`cursor-pointer rounded-xl border p-4 transition-all ${paymentMethod === "card" ? "border-pink bg-pink/5" : "border-border"}`}
-                  >
-                    <p className="font-semibold text-mist text-sm">Credit Card</p>
-                    <p className="text-xs text-muted-foreground mt-1">Standard demo card</p>
-                  </div>
-
-                  <div 
-                    onClick={() => setPaymentMethod("crypto")}
-                    className={`cursor-pointer rounded-xl border p-4 transition-all flex flex-col justify-between ${paymentMethod === "crypto" ? "border-pink bg-pink/5" : "border-border"}`}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <Bitcoin className="size-4 text-pink" />
-                      <p className="font-semibold text-mist text-sm">Crypto (ForumPay)</p>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1">Pay with Bitcoin, USDT, etc.</p>
+              <fieldset className="space-y-4 pt-2">
+                <div className="rounded-xl border border-pink bg-pink/5 p-4 flex items-center gap-3">
+                  <Bitcoin className="size-6 text-pink shrink-0" />
+                  <div>
+                    <p className="font-semibold text-mist text-sm">Cryptocurrency Checkout via ForumPay</p>
+                    <p className="text-xs text-muted-foreground">Pay securely with Bitcoin, USDT, and other supported coins.</p>
                   </div>
                 </div>
-
-                {paymentMethod === "card" ? (
-                  <div className="space-y-4 pt-2">
-                    <Input name="card" label="Card number" placeholder="4242 4242 4242 4242" required />
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Input name="exp" label="Expiry" placeholder="MM/YY" required />
-                      <Input name="cvc" label="CVC" placeholder="123" required />
-                    </div>
-                    <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Lock className="size-3.5" />
-                      Demo checkout — no real payment is processed.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="pt-2">
-                    <p className="text-xs text-muted-foreground">
-                      You will be securely redirected to ForumPay to complete your cryptocurrency checkout.
-                    </p>
-                  </div>
-                )}
               </fieldset>
             </motion.form>
           )}
@@ -286,11 +228,12 @@ export function CheckoutClient() {
             disabled={loadingCrypto}
             onClick={(e) => {
               const form = document.querySelector("form")
-              if (form) form.requestSubmit()
-              else e.preventDefault()
+              if (form) {
+                form.requestSubmit()
+              }
             }}
           >
-            {loadingCrypto ? "Connecting to ForumPay..." : paymentMethod === "crypto" ? `Pay with Crypto · ${formatPrice(total)}` : `Place order · ${formatPrice(total)}`}
+            {loadingCrypto ? "Connecting to ForumPay..." : `Pay with Crypto · ${formatPrice(total)}`}
           </Button>
         )}
         <p className="mt-3 text-center text-xs text-muted-foreground">For laboratory research use only.</p>
