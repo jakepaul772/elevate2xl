@@ -17,6 +17,7 @@ export function CheckoutClient() {
   const { detailed, subtotal, setQty, remove, clear, count } = useCart()
   const [step, setStep] = useState<"cart" | "details">("cart")
   const [loadingCrypto, setLoadingCrypto] = useState(false)
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
 
   const shipping = subtotal >= SHIPPING_THRESHOLD || subtotal === 0 ? 0 : SHIPPING_FLAT
   const tax = Math.round(subtotal * 0.07 * 100) / 100
@@ -28,6 +29,11 @@ export function CheckoutClient() {
     const form = document.querySelector("form")
     if (form && !form.checkValidity()) {
       form.reportValidity()
+      return
+    }
+
+    if (!agreedToTerms) {
+      alert("Please review and agree to the Post-Purchase Disclaimer and Research Use Notice before placing your order.")
       return
     }
 
@@ -179,6 +185,51 @@ export function CheckoutClient() {
                   </div>
                 </div>
               </fieldset>
+
+              <fieldset className="space-y-3 pt-2">
+                <legend className="font-display text-lg font-semibold text-mist">Before you place your order</legend>
+                <div className="max-h-56 overflow-y-auto rounded-xl border border-border bg-secondary/20 p-4 text-xs leading-relaxed text-muted-foreground space-y-3">
+                  <div>
+                    <p className="font-semibold text-mist">Post-Purchase Disclaimer</p>
+                    <p className="mt-1">By placing an order, you acknowledge and agree to the following:</p>
+                  </div>
+                  <ul className="list-disc space-y-1.5 pl-4">
+                    <li>All sales are final. Due to the nature of our products, we do not accept returns or exchanges on opened or used items.</li>
+                    <li>We are not responsible for lost, stolen, delayed, or misdelivered packages once the shipment has been transferred to the shipping carrier. Customers should contact the carrier directly regarding delivery issues.</li>
+                    <li>Customers are responsible for providing a complete and accurate shipping address. We are not responsible for orders shipped to incorrectly entered addresses.</li>
+                    <li>If a package is returned due to an incorrect address, refused delivery, or failure to claim the shipment, additional shipping charges may apply before reshipment.</li>
+                    <li>Shipping times are estimates only and are not guaranteed. Carrier delays are outside of our control.</li>
+                    <li>Products should be inspected upon delivery. Any issues involving damaged, missing, or incorrect items must be reported within 48 hours of delivery.</li>
+                    <li>Products must be stored according to the recommended storage guidelines immediately upon receipt. We are not responsible for product degradation resulting from improper handling or storage after delivery.</li>
+                    <li>Customers are responsible for understanding and complying with all applicable federal, state, and local laws regarding the purchase, possession, and use of these products.</li>
+                    <li>Our maximum liability for any order is limited to the purchase price of the products ordered.</li>
+                    <li>We reserve the right to refuse service, cancel orders, or limit quantities at our sole discretion.</li>
+                  </ul>
+                  <div>
+                    <p className="font-semibold text-mist">Research Use Notice</p>
+                    <p className="mt-1">
+                      These products are sold strictly for laboratory and research purposes only. They are not intended for
+                      human consumption, therapeutic use, diagnosis, treatment, or prevention of any disease. By purchasing,
+                      the customer represents that they understand the intended research-only nature of these products and
+                      will use them accordingly.
+                    </p>
+                  </div>
+                </div>
+                <label htmlFor="agree-terms" className="flex cursor-pointer items-start gap-3 text-sm text-mist">
+                  <input
+                    id="agree-terms"
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    required
+                    className="mt-0.5 size-4 shrink-0 rounded border-border accent-pink"
+                  />
+                  <span>
+                    I have read and agree to the Post-Purchase Disclaimer and Research Use Notice above. By completing my
+                    purchase, I acknowledge that I have read, understood, and agreed to these terms.
+                  </span>
+                </label>
+              </fieldset>
             </motion.form>
           )}
         </AnimatePresence>
@@ -222,19 +273,26 @@ export function CheckoutClient() {
             Proceed to checkout
           </Button>
         ) : (
-          <Button
-            size="lg"
-            className="mt-6 w-full font-semibold"
-            disabled={loadingCrypto}
-            onClick={(e) => {
-              const form = document.querySelector("form")
-              if (form) {
-                form.requestSubmit()
-              }
-            }}
-          >
-            {loadingCrypto ? "Connecting to ForumPay..." : `Pay with Crypto · ${formatPrice(total)}`}
-          </Button>
+          <>
+            <Button
+              size="lg"
+              className="mt-6 w-full font-semibold"
+              disabled={loadingCrypto || !agreedToTerms}
+              onClick={(e) => {
+                const form = document.querySelector("form")
+                if (form) {
+                  form.requestSubmit()
+                }
+              }}
+            >
+              {loadingCrypto ? "Connecting to ForumPay..." : `Pay with Crypto · ${formatPrice(total)}`}
+            </Button>
+            {!agreedToTerms && (
+              <p className="mt-2 text-center text-xs text-muted-foreground">
+                Please check the box above to agree to the terms before paying.
+              </p>
+            )}
+          </>
         )}
         <p className="mt-3 text-center text-xs text-muted-foreground">For laboratory research use only.</p>
       </aside>
