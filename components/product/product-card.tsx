@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { Plus, Check } from 'lucide-react'
 import { useState } from 'react'
-import { CATEGORY_LABELS, formatPrice, type Product } from '@/lib/products'
+import { formatPrice, storageFor, type Product } from '@/lib/products'
 import { useCart } from '@/components/cart/cart-provider'
+import { Logo } from '@/components/brand/logo'
 import { cn } from '@/lib/utils'
 
 export function ProductCard({ product }: { product: Product }) {
@@ -19,50 +20,70 @@ export function ProductCard({ product }: { product: Product }) {
     setTimeout(() => setAdded(false), 1200)
   }
 
+  // Extract storage info for this product's category
+  const storageInfo = storageFor(product.category)
+
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group glass glow-pink-hover relative flex flex-col overflow-hidden rounded-2xl p-5 transition-colors hover:border-pink/40"
+      className="group glass glow-pink-hover relative flex flex-col overflow-hidden rounded-2xl p-6 transition-colors hover:border-pink/40"
     >
-      <div className="flex items-center justify-between">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          {CATEGORY_LABELS[product.category]}
-        </span>
-        {product.bestSeller && (
-          <span className="rounded-full bg-pink/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-pink">
-            Best Seller
+      {/* Label Header: Logo + DNA strand decoration */}
+      <div className="mb-6 flex items-center justify-between">
+        <Logo showWord={true} markClassName="h-6 w-6" className="text-xs" />
+        <div className="h-1 w-20 rounded-full bg-gradient-to-r from-pink/60 to-pink/20" />
+      </div>
+
+      {/* Main Product Name - Large & Bold */}
+      <div className="mb-4">
+        <h2 className="font-display text-5xl font-bold text-mist leading-tight">
+          {product.baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()}
+        </h2>
+      </div>
+
+      {/* Product Details Section */}
+      <div className="mb-6 space-y-2 border-t border-pink/20 pt-4">
+        <div className="flex items-baseline justify-between">
+          <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            {product.baseName}
           </span>
-        )}
+          <span className="text-xs font-medium text-muted-foreground">
+            {product.purity}% PURITY
+          </span>
+        </div>
+        <p className="text-lg font-semibold text-mist">{product.size}</p>
       </div>
 
-      {/* Visual: molecule glyph tile */}
-      <div className="relative mt-4 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-secondary/70 to-ink">
-        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-pink/20 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
-        <span className="font-display text-4xl font-bold text-mist/90">
-          {product.baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 3).toUpperCase()}
-        </span>
-        <span className="absolute bottom-2 right-3 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] font-medium text-mist/70">
-          {product.purity}% pure
-        </span>
+      {/* Storage Instructions */}
+      <div className="mb-6 rounded-lg bg-ink/40 p-3 border border-pink/10">
+        <div className="flex items-start gap-2">
+          <span className="text-pink text-lg mt-0.5">❄️</span>
+          <p className="text-xs leading-relaxed text-muted-foreground">{storageInfo}</p>
+        </div>
       </div>
 
-      <h3 className="mt-4 text-pretty font-display text-base font-semibold leading-tight text-mist">
-        {product.baseName}
-      </h3>
-      <p className="text-sm text-muted-foreground">{product.size}</p>
+      {/* Branding Footer */}
+      <div className="mb-4 flex items-center justify-between text-xs text-muted-foreground">
+        <span className="font-semibold uppercase tracking-wider">RESEARCH USE ONLY</span>
+        <span>WWW.E2XL.ORG</span>
+      </div>
 
-      <div className="mt-4 flex items-center justify-between">
-        <span className="tabular font-display text-lg font-bold text-mist">{formatPrice(product.price)}</span>
+      {/* Bottom Decoration Line */}
+      <div className="mb-4 h-1 w-full rounded-full bg-gradient-to-r from-pink/60 via-pink/30 to-secondary/40" />
+
+      {/* Price & Add Button */}
+      <div className="flex items-center justify-between mt-auto pt-4 border-t border-pink/10">
+        <span className="font-display text-2xl font-bold text-mist">{formatPrice(product.price)}</span>
         <button
           type="button"
           onClick={quickAdd}
           className={cn(
-            'inline-flex h-9 items-center gap-1.5 rounded-full px-3.5 text-sm font-semibold transition-all duration-200',
+            'inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-all duration-200',
             added ? 'bg-mist text-ink' : 'bg-primary text-primary-foreground hover:brightness-110',
           )}
           aria-label={`Add ${product.name} to cart`}
         >
-          {added ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+          {added ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           {added ? 'Added' : 'Add'}
         </button>
       </div>
