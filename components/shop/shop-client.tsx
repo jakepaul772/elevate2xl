@@ -33,7 +33,12 @@ export function ShopClient({ initialCategory }: { initialCategory: Category | 'a
     if (category !== 'all') list = list.filter((p) => p.category === category)
     if (query.trim()) {
       const q = query.trim().toLowerCase()
-      list = list.filter((p) => p.name.toLowerCase().includes(q) || p.baseName.toLowerCase().includes(q))
+      list = list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.baseName.toLowerCase().includes(q) ||
+          (p.searchKeywords ?? []).some((k) => k.toLowerCase().includes(q)),
+      )
     }
     switch (sort) {
       case 'price-asc':
