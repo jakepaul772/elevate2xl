@@ -32,11 +32,10 @@ export function StaggerGroup({ children, className }: { children: ReactNode; cla
     <motion.div
       className={className}
       initial={reduce ? false : 'hidden'}
-      whileInView={reduce ? undefined : 'show'}
-      viewport={{ once: true, margin: '-60px' }}
+      animate="show"
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.08 } },
+        show: { transition: { staggerChildren: 0.06 } },
       }}
     >
       {children}
