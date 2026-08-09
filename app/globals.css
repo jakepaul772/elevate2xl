@@ -144,8 +144,16 @@
       background-position: 40% 30%, 60% 40%, 30% 70%, 0 0;
     }
   }
-  .tabular {
+ .tabular {
     font-variant-numeric: tabular-nums;
+  }
+  /* Pink-to-purple-to-navy label gradient */
+  .label-gradient {
+    background: linear-gradient(115deg, #1c3a63 0%, #6a2f8c 55%, #c2298f 100%);
+    border: 1px solid rgba(226, 140, 200, 0.18);
+  }
+  .label-gradient:hover {
+    border-color: rgba(226, 140, 200, 0.32);
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
