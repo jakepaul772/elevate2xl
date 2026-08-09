@@ -14,8 +14,8 @@ const GLP_BASES = new Set(['SXL', 'TXL', 'RXL'])
 // A few base names don't survive the generic 4-letter truncation intact
 // (BPC-157 -> BPC1, TB-500 -> TB50), so they get an explicit full code.
 const CODE_OVERRIDES: Record<string, string> = {
-  'BPC-157': 'BPC157',
-  'TB-500': 'TB500',
+  'BPC-157': 'BPC-157',
+  'TB-500': 'TB-500',
 }
 
 function displayCode(baseName: string): string {
