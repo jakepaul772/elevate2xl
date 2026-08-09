@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group glass glow-pink-hover relative flex flex-col overflow-hidden rounded-2xl p-6 transition-colors hover:border-pink/40"
+      className="group label-gradient glow-pink-hover relative flex flex-col overflow-hidden rounded-2xl p-6 transition-colors hover:border-pink/40"
     >
       {/* Label Header: Logo + DNA strand decoration */}
       <div className="mb-6 flex items-center justify-between">
