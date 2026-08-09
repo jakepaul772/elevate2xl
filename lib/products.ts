@@ -183,7 +183,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.5%',
     bestSeller: false,
-    searchKeywords: ['sxl']
+    searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
   {
     id: 'sxl-0-5mg',
@@ -197,7 +197,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.5%',
     bestSeller: true,
-    searchKeywords: ['sxl']
+    searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
   {
     id: 'sxl-1mg',
@@ -211,7 +211,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.5%',
     bestSeller: false,
-    searchKeywords: ['sxl']
+    searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
   {
     id: 'sxl-2mg',
@@ -225,7 +225,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.5%',
     bestSeller: false,
-    searchKeywords: ['sxl']
+    searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
   {
     id: 'txl-10mg',
@@ -239,7 +239,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.7%',
     bestSeller: true,
-    searchKeywords: ['txl']
+    searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
   {
     id: 'txl-20mg',
@@ -253,7 +253,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.7%',
     bestSeller: false,
-    searchKeywords: ['txl']
+    searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
   {
     id: 'txl-30mg',
@@ -267,7 +267,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.7%',
     bestSeller: false,
-    searchKeywords: ['txl']
+    searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
   {
     id: 'txl-60mg',
@@ -281,7 +281,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.7%',
     bestSeller: false,
-    searchKeywords: ['txl']
+    searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
   {
     id: 'rxl-10mg',
@@ -295,7 +295,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.6%',
     bestSeller: true,
-    searchKeywords: ['rxl']
+    searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
   {
     id: 'rxl-20mg',
@@ -309,7 +309,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.6%',
     bestSeller: false,
-    searchKeywords: ['rxl']
+    searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
   {
     id: 'rxl-30mg',
@@ -323,7 +323,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.6%',
     bestSeller: false,
-    searchKeywords: ['rxl']
+    searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
   {
     id: 'rxl-60mg',
@@ -337,7 +337,7 @@ export const products: Product[] = [
     inStock: true,
     purity: '99.6%',
     bestSeller: false,
-    searchKeywords: ['rxl']
+    searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
   {
     id: 'melanotan-ii-10mg',
