@@ -8,6 +8,21 @@ import { useCart } from '@/components/cart/cart-provider'
 import { Logo } from '@/components/brand/logo'
 import { cn } from '@/lib/utils'
 
+// GLPs get their dose shown next to the name (e.g. "SXL 1", "TXL 10").
+const GLP_BASES = new Set(['SXL', 'TXL', 'RXL'])
+
+// A few base names don't survive the generic 4-letter truncation intact
+// (BPC-157 -> BPC1, TB-500 -> TB50), so they get an explicit full code.
+const CODE_OVERRIDES: Record<string, string> = {
+  'BPC-157': 'BPC157',
+  'TB-500': 'TB500',
+}
+
+function displayCode(baseName: string): string {
+  if (CODE_OVERRIDES[baseName]) return CODE_OVERRIDES[baseName]
+  return baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()
+}
+
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart()
   const [added, setAdded] = useState(false)
@@ -22,6 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   // Extract storage info for this product's category
   const storageInfo = storageFor(product.category)
+  const isGlp = GLP_BASES.has(product.baseName)
 
   return (
     <Link
@@ -37,8 +53,8 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Main Product Name - Large & Bold */}
       <div className="mb-4">
         <h2 className="font-display text-5xl font-bold text-mist leading-tight">
-          {product.baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()}{' '}
-          {shortDose(product.dosage)}
+          {displayCode(product.baseName)}
+          {isGlp && <>{' '}{shortDose(product.dosage)}</>}
         </h2>
       </div>
 
@@ -52,7 +68,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.purity}% PURITY
           </span>
         </div>
-        <p className="text-lg font-semibold text-mist">{product.size}</p>
+        <p className="text-lg font-semibold text-mist">{product.dosage}</p>
       </div>
 
       {/* Storage Instructions */}
