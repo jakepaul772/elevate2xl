@@ -24,10 +24,6 @@ export function shortDose(dosage: string): string {
   const noUnit = dosage.replace(/mg|ml/gi, '').trim();
   return noUnit.replace(/^0(\.\d+)$/, '$1');
 }
-export function shortDose(dosage: string): string {
-  const noUnit = dosage.replace(/mg|ml/gi, '').trim();
-  return noUnit.replace(/^0(\.\d+)$/, '$1');
-}
 
 export function storageFor(product: Product): string {
   return 'Store refrigerated at 2°C – 8°C';
