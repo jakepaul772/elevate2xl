@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Plus, Check } from 'lucide-react'
 import { useState } from 'react'
-import { formatPrice, storageFor, type Product } from '@/lib/products'
+import { formatPrice, shortDose, storageFor, type Product } from '@/lib/products'
 import { useCart } from '@/components/cart/cart-provider'
 import { Logo } from '@/components/brand/logo'
 import { cn } from '@/lib/utils'
@@ -37,8 +37,11 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Main Product Name - Large & Bold */}
       <div className="mb-4">
         <h2 className="font-display text-5xl font-bold text-mist leading-tight">
-          {product.baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()}
-        </h2>
+  {product.baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()}{' '}
+  {shortDose(product.dosage)}
+</h2>
+Commit that one too, and Vercel will redeploy automatically.
+
       </div>
 
       {/* Product Details Section */}
