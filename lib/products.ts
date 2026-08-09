@@ -11,6 +11,38 @@ export interface Product {
   searchKeywords?: string[];
 }
 
+export type Category = string;
+
+export const CATEGORY_LABELS: Record<string, string> = {
+  Peptides: 'Peptides',
+  Supplies: 'Supplies',
+  'Research Compounds': 'Research Compounds'
+};
+
+export function formatPrice(price: number): string {
+  return `$${price.toFixed(2)}`;
+}
+
+export function storageFor(product: Product): string {
+  return 'Store refrigerated at 2°C – 8°C';
+}
+
+export function getProduct(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+export function getRelated(product: Product, limit = 3): Product[] {
+  return products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, limit);
+}
+
+export function getVariants(product: Product): Product[] {
+  return products.filter((p) => p.category === product.category);
+}
+
+export function getBestSellers(limit = 4): Product[] {
+  return products.slice(0, limit);
+}
+
 export const products: Product[] = [
   // --- Semaglutide -> SXL ---
   {
