@@ -20,6 +20,10 @@ export const CATEGORY_LABELS: Record<string, string> = {
   'Research Compounds': 'Research Compounds'
 };
 
+export function formatPrice(price: number): string {
+  return `$${price.toFixed(2)}`;
+}
+
 export function shortDose(dosage: string): string {
   const noUnit = dosage.replace(/mg|ml/gi, '').trim();
   return noUnit.replace(/^0(\.\d+)$/, '$1');
