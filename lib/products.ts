@@ -69,7 +69,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Tesamorelin.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['tesamorelin']
   },
@@ -83,7 +83,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade CJC / Ipamorelin.',
     inStock: true,
-    purity: '99.4%',
+    purity: '99.4',
     bestSeller: false,
     searchKeywords: ['cjc / ipamorelin']
   },
@@ -97,7 +97,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade CJC-1295 w/o DAC.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['cjc-1295 w/o dac']
   },
@@ -111,7 +111,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade CJC-1295 w/ DAC.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['cjc-1295 w/ dac']
   },
@@ -125,7 +125,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade BPC-157.',
     inStock: true,
-    purity: '99.6%',
+    purity: '99.6',
     bestSeller: true,
     searchKeywords: ['bpc-157']
   },
@@ -139,7 +139,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade TB-500.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: true,
     searchKeywords: ['tb-500']
   },
@@ -153,7 +153,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Wolverine (BPC+TB).',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['wolverine (bpc+tb)']
   },
@@ -167,7 +167,7 @@ export const products: Product[] = [
     dosage: '70mg',
     description: 'Research grade GLOW.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: true,
     searchKeywords: ['glow']
   },
@@ -181,7 +181,7 @@ export const products: Product[] = [
     dosage: '0.25mg',
     description: 'Research grade SXL.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
@@ -195,7 +195,7 @@ export const products: Product[] = [
     dosage: '0.5mg',
     description: 'Research grade SXL.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: true,
     searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
@@ -209,7 +209,7 @@ export const products: Product[] = [
     dosage: '1mg',
     description: 'Research grade SXL.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
@@ -223,7 +223,7 @@ export const products: Product[] = [
     dosage: '2mg',
     description: 'Research grade SXL.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['semaglutide', 'sema', 'sxl', 'glp', 'glp-1']
   },
@@ -237,7 +237,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade TXL.',
     inStock: true,
-    purity: '99.7%',
+    purity: '99.7',
     bestSeller: true,
     searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
@@ -251,7 +251,7 @@ export const products: Product[] = [
     dosage: '20mg',
     description: 'Research grade TXL.',
     inStock: true,
-    purity: '99.7%',
+    purity: '99.7',
     bestSeller: false,
     searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
@@ -265,7 +265,7 @@ export const products: Product[] = [
     dosage: '30mg',
     description: 'Research grade TXL.',
     inStock: true,
-    purity: '99.7%',
+    purity: '99.7',
     bestSeller: false,
     searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
@@ -279,7 +279,7 @@ export const products: Product[] = [
     dosage: '60mg',
     description: 'Research grade TXL.',
     inStock: true,
-    purity: '99.7%',
+    purity: '99.7',
     bestSeller: false,
     searchKeywords: ['tirzepatide', 'tirz', 'txl', 'glp', 'glp-1']
   },
@@ -293,7 +293,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade RXL.',
     inStock: true,
-    purity: '99.6%',
+    purity: '99.6',
     bestSeller: true,
     searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
@@ -307,7 +307,7 @@ export const products: Product[] = [
     dosage: '20mg',
     description: 'Research grade RXL.',
     inStock: true,
-    purity: '99.6%',
+    purity: '99.6',
     bestSeller: false,
     searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
@@ -321,7 +321,7 @@ export const products: Product[] = [
     dosage: '30mg',
     description: 'Research grade RXL.',
     inStock: true,
-    purity: '99.6%',
+    purity: '99.6',
     bestSeller: false,
     searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
@@ -335,7 +335,7 @@ export const products: Product[] = [
     dosage: '60mg',
     description: 'Research grade RXL.',
     inStock: true,
-    purity: '99.6%',
+    purity: '99.6',
     bestSeller: false,
     searchKeywords: ['retatrutide', 'reta', 'rxl', 'glp', 'glp-1']
   },
@@ -349,7 +349,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Melanotan II.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['melanotan ii']
   },
@@ -363,7 +363,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade PT-141.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['pt-141']
   },
@@ -377,7 +377,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Selank.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['selank']
   },
@@ -391,7 +391,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Semax.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['semax']
   },
@@ -405,7 +405,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade MOTS-c.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['mots-c']
   },
@@ -419,7 +419,7 @@ export const products: Product[] = [
     dosage: '500mg',
     description: 'Research grade NAD+.',
     inStock: true,
-    purity: '99.4%',
+    purity: '99.4',
     bestSeller: false,
     searchKeywords: ['nad+']
   },
@@ -433,7 +433,7 @@ export const products: Product[] = [
     dosage: '1000mg',
     description: 'Research grade NAD+.',
     inStock: true,
-    purity: '99.4%',
+    purity: '99.4',
     bestSeller: false,
     searchKeywords: ['nad+']
   },
@@ -447,7 +447,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade Sermorelin.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['sermorelin']
   },
@@ -461,7 +461,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Sermorelin.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['sermorelin']
   },
@@ -475,7 +475,7 @@ export const products: Product[] = [
     dosage: '2mg',
     description: 'Research grade PEG-MGF.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['peg-mgf']
   },
@@ -489,7 +489,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade Oxytocin.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['oxytocin']
   },
@@ -503,7 +503,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade MT2.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['mt2']
   },
@@ -517,7 +517,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade LL-37.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['ll-37']
   },
@@ -531,7 +531,7 @@ export const products: Product[] = [
     dosage: '1mg',
     description: 'Research grade IGF-1 LR3.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['igf-1 lr3']
   },
@@ -545,7 +545,7 @@ export const products: Product[] = [
     dosage: '100mcg',
     description: 'Research grade GnRH.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['gnrh']
   },
@@ -559,7 +559,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade Epitalon.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['epitalon']
   },
@@ -573,7 +573,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade Fragment 176-191.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['fragment 176-191']
   },
@@ -587,7 +587,7 @@ export const products: Product[] = [
     dosage: '50mg',
     description: 'Research grade GHK-Cu.',
     inStock: true,
-    purity: '99.4%',
+    purity: '99.4',
     bestSeller: false,
     searchKeywords: ['ghk-cu']
   },
@@ -601,7 +601,7 @@ export const products: Product[] = [
     dosage: '100mg',
     description: 'Research grade GHK-Cu.',
     inStock: true,
-    purity: '99.4%',
+    purity: '99.4',
     bestSeller: false,
     searchKeywords: ['ghk-cu']
   },
@@ -615,7 +615,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade GHRP-2.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['ghrp-2']
   },
@@ -629,7 +629,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade GHRP-2.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['ghrp-2']
   },
@@ -643,7 +643,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade GHRP-6.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['ghrp-6']
   },
@@ -657,7 +657,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade GHRP-6.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['ghrp-6']
   },
@@ -671,7 +671,7 @@ export const products: Product[] = [
     dosage: '1500mg',
     description: 'Research grade Glutathione.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['glutathione']
   },
@@ -685,7 +685,7 @@ export const products: Product[] = [
     dosage: '5mg',
     description: 'Research grade Ipamorelin.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['ipamorelin']
   },
@@ -699,7 +699,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade 5-Amino-1MQ.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['5-amino-1mq']
   },
@@ -713,7 +713,7 @@ export const products: Product[] = [
     dosage: '10mg',
     description: 'Research grade KPV.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['kpv']
   },
@@ -727,7 +727,7 @@ export const products: Product[] = [
     dosage: '70mg',
     description: 'Research grade KLOW.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['klow']
   },
@@ -741,7 +741,7 @@ export const products: Product[] = [
     dosage: '30ml',
     description: 'Research grade BAC Water.',
     inStock: true,
-    purity: '99.9%',
+    purity: '99.9',
     bestSeller: false,
     searchKeywords: ['bac water']
   },
@@ -757,7 +757,7 @@ export const products: Product[] = [
     dosage: '60ml',
     description: 'Research grade Iver / Fen.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['iver / fen']
   },
@@ -771,7 +771,7 @@ export const products: Product[] = [
     dosage: '25mg · 30ml',
     description: 'Research grade MK-677.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['mk-677']
   },
@@ -785,7 +785,7 @@ export const products: Product[] = [
     dosage: '30ml',
     description: 'Research grade Tadalafil.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['tadalafil']
   },
@@ -799,7 +799,7 @@ export const products: Product[] = [
     dosage: '10mg · 30ml',
     description: 'Research grade Vardenafil.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['vardenafil']
   },
@@ -813,7 +813,7 @@ export const products: Product[] = [
     dosage: '50mg · 30ml',
     description: 'Research grade Sildenafil.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['sildenafil']
   },
@@ -827,7 +827,7 @@ export const products: Product[] = [
     dosage: '30ml',
     description: 'Research grade Tada 30mg / Sild 50mg.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['tada 30mg / sild 50mg']
   },
@@ -841,7 +841,7 @@ export const products: Product[] = [
     dosage: '1mg · 30ml',
     description: 'Research grade Anastrozole.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['anastrozole']
   },
@@ -855,7 +855,7 @@ export const products: Product[] = [
     dosage: '5mg · 30ml',
     description: 'Research grade SERM.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['serm']
   },
@@ -869,7 +869,7 @@ export const products: Product[] = [
     dosage: '10mg · 30ml',
     description: 'Research grade SERM.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['serm']
   },
@@ -883,7 +883,7 @@ export const products: Product[] = [
     dosage: '2.5mg · 30ml',
     description: 'Research grade Letrozole.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['letrozole']
   },
@@ -897,7 +897,7 @@ export const products: Product[] = [
     dosage: '100mcg · 30ml',
     description: 'Research grade T3.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['t3']
   },
@@ -911,7 +911,7 @@ export const products: Product[] = [
     dosage: '10mg · 30ml',
     description: 'Research grade RAD-140.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['rad-140']
   },
@@ -925,7 +925,7 @@ export const products: Product[] = [
     dosage: '2mg · 30ml',
     description: 'Research grade Pramipexole.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['pramipexole']
   },
@@ -939,7 +939,7 @@ export const products: Product[] = [
     dosage: '33mg · 30ml',
     description: 'Research grade MK-2866 (Ostarine).',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['mk-2866 (ostarine)']
   },
@@ -953,7 +953,7 @@ export const products: Product[] = [
     dosage: '1mg · 30ml',
     description: 'Research grade Ketotifen Fumarate.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['ketotifen fumarate']
   },
@@ -967,7 +967,7 @@ export const products: Product[] = [
     dosage: '10mg · 30ml',
     description: 'Research grade GW-501516.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['gw-501516']
   },
@@ -981,7 +981,7 @@ export const products: Product[] = [
     dosage: '25mg · 30ml',
     description: 'Research grade Exemestane.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['exemestane']
   },
@@ -995,7 +995,7 @@ export const products: Product[] = [
     dosage: '40mg · 30ml',
     description: 'Research grade Clomiphene.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['clomiphene']
   },
@@ -1009,7 +1009,7 @@ export const products: Product[] = [
     dosage: '200mcg · 30ml',
     description: 'Research grade Clenbuterol.',
     inStock: true,
-    purity: '99.1%',
+    purity: '99.1',
     bestSeller: false,
     searchKeywords: ['clenbuterol']
   },
@@ -1025,7 +1025,7 @@ export const products: Product[] = [
     dosage: '500mcg · 60ct',
     description: 'Research grade Tesofensine.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['tesofensine']
   },
@@ -1039,7 +1039,7 @@ export const products: Product[] = [
     dosage: '10mg · 30ct',
     description: 'Research grade LGD-4033.',
     inStock: true,
-    purity: '99.3%',
+    purity: '99.3',
     bestSeller: false,
     searchKeywords: ['lgd-4033']
   },
@@ -1053,7 +1053,7 @@ export const products: Product[] = [
     dosage: '500mcg · 60ct',
     description: 'Research grade AOD-9604.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['aod-9604']
   },
@@ -1067,7 +1067,7 @@ export const products: Product[] = [
     dosage: '60ct',
     description: 'Research grade Bello Capello.',
     inStock: true,
-    purity: '99.0%',
+    purity: '99.0',
     bestSeller: false,
     searchKeywords: ['bello capello']
   },
@@ -1081,7 +1081,7 @@ export const products: Product[] = [
     dosage: '12.5mg · 60ct',
     description: 'Research grade MK-677.',
     inStock: true,
-    purity: '99.2%',
+    purity: '99.2',
     bestSeller: false,
     searchKeywords: ['mk-677']
   },
@@ -1095,7 +1095,7 @@ export const products: Product[] = [
     dosage: '500mcg · 60ct',
     description: 'Research grade BPC-157.',
     inStock: true,
-    purity: '99.5%',
+    purity: '99.5',
     bestSeller: false,
     searchKeywords: ['bpc-157']
   },
