@@ -83,7 +83,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
+    background: linear-gradient(165deg, #0b1b2e 0%, #142a4d 22%, #33245e 50%, #6a2f8c 75%, #8a2f7e 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
   ::selection {
     background: var(--color-pink);
@@ -144,7 +147,7 @@
       background-position: 40% 30%, 60% 40%, 30% 70%, 0 0;
     }
   }
- .tabular {
+  .tabular {
     font-variant-numeric: tabular-nums;
   }
   /* Pink-to-purple-to-navy label gradient */
