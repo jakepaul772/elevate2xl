@@ -120,7 +120,7 @@ export function ShopClient({ initialCategory }: { initialCategory: Category | 'a
           <p className="text-muted-foreground">No products match your search.</p>
         </div>
       ) : (
-        <StaggerGroup className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <StaggerGroup key={category} className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((product) => (
             <StaggerItem key={product.slug}>
               <ProductCard product={product} />
