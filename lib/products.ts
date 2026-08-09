@@ -1,6 +1,7 @@
 export interface Product {
   id: string;
   name: string;
+  baseName: string;
   slug: string;
   category: string;
   price: number;
@@ -48,6 +49,7 @@ export const products: Product[] = [
   {
     id: 'sxl-025',
     name: 'SXL 0.25mg',
+    baseName: 'SXL',
     slug: 'sxl-025mg',
     category: 'Peptides',
     price: 150,
@@ -60,6 +62,7 @@ export const products: Product[] = [
   {
     id: 'sxl-05',
     name: 'SXL 0.5mg',
+    baseName: 'SXL',
     slug: 'sxl-05mg',
     category: 'Peptides',
     price: 175,
@@ -72,6 +75,7 @@ export const products: Product[] = [
   {
     id: 'sxl-1',
     name: 'SXL 1mg',
+    baseName: 'SXL',
     slug: 'sxl-1mg',
     category: 'Peptides',
     price: 210,
@@ -84,6 +88,7 @@ export const products: Product[] = [
   {
     id: 'sxl-2',
     name: 'SXL 2mg',
+    baseName: 'SXL',
     slug: 'sxl-2mg',
     category: 'Peptides',
     price: 290,
@@ -98,6 +103,7 @@ export const products: Product[] = [
   {
     id: 'txl-10',
     name: 'TXL 10mg',
+    baseName: 'TXL',
     slug: 'txl-10mg',
     category: 'Peptides',
     price: 200,
@@ -110,6 +116,7 @@ export const products: Product[] = [
   {
     id: 'txl-20',
     name: 'TXL 20mg',
+    baseName: 'TXL',
     slug: 'txl-20mg',
     category: 'Peptides',
     price: 280,
@@ -122,6 +129,7 @@ export const products: Product[] = [
   {
     id: 'txl-30',
     name: 'TXL 30mg',
+    baseName: 'TXL',
     slug: 'txl-30mg',
     category: 'Peptides',
     price: 350,
@@ -134,6 +142,7 @@ export const products: Product[] = [
   {
     id: 'txl-60',
     name: 'TXL 60mg',
+    baseName: 'TXL',
     slug: 'txl-60mg',
     category: 'Peptides',
     price: 550,
@@ -148,6 +157,7 @@ export const products: Product[] = [
   {
     id: 'rxl-10',
     name: 'RXL 10mg',
+    baseName: 'RXL',
     slug: 'rxl-10mg',
     category: 'Peptides',
     price: 199,
@@ -160,6 +170,7 @@ export const products: Product[] = [
   {
     id: 'rxl-20',
     name: 'RXL 20mg',
+    baseName: 'RXL',
     slug: 'rxl-20mg',
     category: 'Peptides',
     price: 229,
@@ -172,6 +183,7 @@ export const products: Product[] = [
   {
     id: 'rxl-30',
     name: 'RXL 30mg',
+    baseName: 'RXL',
     slug: 'rxl-30mg',
     category: 'Peptides',
     price: 320,
@@ -184,6 +196,7 @@ export const products: Product[] = [
   {
     id: 'rxl-60',
     name: 'RXL 60mg',
+    baseName: 'RXL',
     slug: 'rxl-60mg',
     category: 'Peptides',
     price: 449,
@@ -198,6 +211,7 @@ export const products: Product[] = [
   {
     id: 'tb-500-10',
     name: 'TB-500 10mg',
+    baseName: 'TB-500',
     slug: 'tb-500-10mg',
     category: 'Peptides',
     price: 85,
@@ -210,6 +224,7 @@ export const products: Product[] = [
   {
     id: 'ipamorelin',
     name: 'Ipamorelin',
+    baseName: 'Ipamorelin',
     slug: 'ipamorelin',
     category: 'Peptides',
     price: 65,
@@ -222,6 +237,7 @@ export const products: Product[] = [
   {
     id: 'bac-water',
     name: 'BAC Water',
+    baseName: 'BAC Water',
     slug: 'bac-water',
     category: 'Supplies',
     price: 30,
@@ -234,6 +250,7 @@ export const products: Product[] = [
   {
     id: 'nad-500',
     name: 'NAD+ 500',
+    baseName: 'NAD+',
     slug: 'nad-500',
     category: 'Research Compounds',
     price: 99,
@@ -246,6 +263,7 @@ export const products: Product[] = [
   {
     id: 'klow',
     name: 'KLOW',
+    baseName: 'KLOW',
     slug: 'klow',
     category: 'Peptides',
     price: 149,
@@ -258,6 +276,7 @@ export const products: Product[] = [
   {
     id: 'kpv',
     name: 'KPV',
+    baseName: 'KPV',
     slug: 'kpv',
     category: 'Peptides',
     price: 45,
