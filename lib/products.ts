@@ -719,17 +719,17 @@ export const products: Product[] = [
   },
   {
     id: 'bac-water-30ml',
-    name: 'BAC Water 30ml',
-    baseName: 'BAC Water',
+    name: 'H2O 30ml',
+    baseName: 'H2O',
     slug: 'bac-water-30ml',
     category: 'peptides',
     price: 30,
     dosage: '30ml',
-    description: 'Research grade BAC Water.',
+    description: 'Research grade H2O.',
     inStock: true,
     purity: '99.9',
     bestSeller: false,
-    searchKeywords: ['bac water']
+    searchKeywords: ['h2o']
   },
 
   // --- Liquids ---
