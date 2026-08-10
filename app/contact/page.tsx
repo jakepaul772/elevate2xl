@@ -28,7 +28,7 @@ export default function ContactPage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 {channels.map((c) => (
-                  <div key={c.label} className="rounded-2xl border border-border bg-card p-5">
+                  <div key={c.label} className="label-gradient glow-pink-hover rounded-2xl p-5">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{c.label}</p>
                     <p className="mt-2 font-display text-lg text-mist">{c.value}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{c.note}</p>
