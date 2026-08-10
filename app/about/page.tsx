@@ -95,7 +95,7 @@ export default function AboutPage() {
         <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-2">
           {STANDARDS.map((s) => (
             <StaggerItem key={s.title}>
-              <div className="glass h-full rounded-2xl p-7">
+              <div className="label-gradient glow-pink-hover h-full rounded-2xl p-7">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-pink/15">
                   <s.icon className="h-5 w-5 text-pink" aria-hidden="true" />
                 </div>
@@ -110,7 +110,7 @@ export default function AboutPage() {
       {/* Pipeline */}
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
         <Reveal>
-          <div className="glass rounded-3xl p-8 sm:p-12">
+          <div className="label-gradient glow-pink-hover rounded-3xl p-8 sm:p-12">
             <div className="grid gap-8 sm:grid-cols-3">
               {[
                 { icon: Beaker, step: 'Synthesis', desc: 'Produced by qualified partners under documented protocols.' },
