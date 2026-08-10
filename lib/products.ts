@@ -494,20 +494,6 @@ export const products: Product[] = [
     searchKeywords: ['oxytocin']
   },
   {
-    id: 'mt2-10mg',
-    name: 'MT2 10mg',
-    baseName: 'MT2',
-    slug: 'mt2-10mg',
-    category: 'peptides',
-    price: 60,
-    dosage: '10mg',
-    description: 'Research grade MT2.',
-    inStock: true,
-    purity: '99.0',
-    bestSeller: false,
-    searchKeywords: ['mt2']
-  },
-  {
     id: 'll-37-5mg',
     name: 'LL-37 5mg',
     baseName: 'LL-37',
