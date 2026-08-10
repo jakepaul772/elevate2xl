@@ -3,13 +3,10 @@
 import Link from 'next/link'
 import { Plus, Check, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
-import { formatPrice, shortDose, storageFor, type Product } from '@/lib/products'
+import { formatPrice, storageFor, type Product } from '@/lib/products'
 import { useCart } from '@/components/cart/cart-provider'
 import { Logo } from '@/components/brand/logo'
 import { cn } from '@/lib/utils'
-
-// GLPs get their dose shown next to the name (e.g. "SXL 1", "TXL 10").
-const GLP_BASES = new Set(['SXL', 'TXL', 'RXL'])
 
 // Full display name: strip any parenthetical suffix (e.g. "(Ostarine)"),
 // keep dashes/plus/slashes intact, uppercase. No more 4-letter truncation.
@@ -49,7 +46,6 @@ export function ProductCard({ product, variants }: { product: Product; variants?
   }
 
   const storageInfo = storageFor(current.category)
-  const isGlp = GLP_BASES.has(current.baseName)
 
   return (
     <Link
@@ -66,7 +62,6 @@ export function ProductCard({ product, variants }: { product: Product; variants?
       <div className="mb-4">
         <h2 className="font-display text-3xl font-bold text-mist leading-snug break-words">
           {displayCode(current.baseName)}
-          {isGlp && <>{' '}{shortDose(current.dosage)}</>}
         </h2>
       </div>
 
