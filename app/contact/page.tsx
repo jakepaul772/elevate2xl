@@ -28,7 +28,7 @@ export default function ContactPage() {
             <div className="space-y-8">
               <div className="rounded-2xl border border-pink/30 bg-pink/10 p-5">
                 <p className="font-display text-lg text-mist">
-                  PLEASE CALL...{' '}
+                  PLEASE CALL{' '}
                   <a href="tel:7723002982" className="text-pink underline">
                     772-300-2982
                   </a>{' '}
