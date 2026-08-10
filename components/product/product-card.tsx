@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Plus, Check } from 'lucide-react'
+import { Plus, Check, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { formatPrice, shortDose, storageFor, type Product } from '@/lib/products'
 import { useCart } from '@/components/cart/cart-provider'
@@ -11,37 +11,49 @@ import { cn } from '@/lib/utils'
 // GLPs get their dose shown next to the name (e.g. "SXL 1", "TXL 10").
 const GLP_BASES = new Set(['SXL', 'TXL', 'RXL'])
 
-// A few base names don't survive the generic 4-letter truncation intact
-// (BPC-157 -> BPC1, TB-500 -> TB50), so they get an explicit full code.
-const CODE_OVERRIDES: Record<string, string> = {
-  'BPC-157': 'BPC-157',
-  'TB-500': 'TB-500',
-}
-
+// Full display name: strip any parenthetical suffix (e.g. "(Ostarine)"),
+// keep dashes/plus/slashes intact, uppercase. No more 4-letter truncation.
 function displayCode(baseName: string): string {
-  if (CODE_OVERRIDES[baseName]) return CODE_OVERRIDES[baseName]
-  return baseName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase()
+  return baseName.replace(/\s*\([^)]*\)\s*$/, '').toUpperCase()
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, variants }: { product: Product; variants?: Product[] }) {
   const { add } = useCart()
   const [added, setAdded] = useState(false)
+
+  const options = variants && variants.length > 0 ? variants : [product]
+  const [selectedIdx, setSelectedIdx] = useState(() =>
+    Math.max(
+      0,
+      options.findIndex((v) => v.slug === product.slug),
+    ),
+  )
+  const current = options[selectedIdx] ?? options[0]
+  const hasVariants = options.length > 1
 
   function quickAdd(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    add(product.slug, 1)
+    add(current.slug, 1)
     setAdded(true)
     setTimeout(() => setAdded(false), 1200)
   }
 
-  // Extract storage info for this product's category
-  const storageInfo = storageFor(product.category)
-  const isGlp = GLP_BASES.has(product.baseName)
+  function onSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setSelectedIdx(Number(e.target.value))
+  }
+
+  function stopNav(e: React.SyntheticEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  const storageInfo = storageFor(current.category)
+  const isGlp = GLP_BASES.has(current.baseName)
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/product/${current.slug}`}
       className="group label-gradient glow-pink-hover relative flex flex-col overflow-hidden rounded-2xl p-6 transition-colors hover:border-pink/40"
     >
       {/* Label Header: Logo + DNA strand decoration */}
@@ -50,25 +62,45 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="h-1 w-20 rounded-full bg-gradient-to-r from-pink/60 to-pink/20" />
       </div>
 
-      {/* Main Product Name - Large & Bold */}
+      {/* Main Product Name */}
       <div className="mb-4">
-        <h2 className="font-display text-5xl font-bold text-mist leading-tight">
-          {displayCode(product.baseName)}
-          {isGlp && <>{' '}{shortDose(product.dosage)}</>}
+        <h2 className="font-display text-3xl font-bold text-mist leading-snug break-words">
+          {displayCode(current.baseName)}
+          {isGlp && <>{' '}{shortDose(current.dosage)}</>}
         </h2>
       </div>
 
       {/* Product Details Section */}
       <div className="mb-6 space-y-2 border-t border-pink/20 pt-4">
-        <div className="flex items-baseline justify-between">
+        <div className="flex items-baseline justify-between gap-2">
           <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-            {product.baseName}
+            {current.baseName}
           </span>
-          <span className="text-xs font-medium text-muted-foreground">
-            {product.purity}% PURITY
+          <span className="shrink-0 text-xs font-medium text-muted-foreground">
+            {current.purity}% PURITY
           </span>
         </div>
-        <p className="text-lg font-semibold text-mist">{product.dosage}</p>
+
+        {hasVariants ? (
+          <div className="relative" onClick={stopNav}>
+            <select
+              value={selectedIdx}
+              onChange={onSelectChange}
+              onClick={stopNav}
+              className="glass w-full appearance-none rounded-lg border border-pink/20 bg-ink/40 px-3 py-2 pr-8 text-lg font-semibold text-mist outline-none focus:border-pink/50"
+              aria-label={`Select ${current.baseName} dosage`}
+            >
+              {options.map((v, i) => (
+                <option key={v.slug} value={i} className="bg-card text-mist">
+                  {v.dosage}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
+        ) : (
+          <p className="text-lg font-semibold text-mist">{current.dosage}</p>
+        )}
       </div>
 
       {/* Storage Instructions */}
@@ -90,7 +122,7 @@ export function ProductCard({ product }: { product: Product }) {
 
       {/* Price & Add Button */}
       <div className="flex items-center justify-between mt-auto pt-4 border-t border-pink/10">
-        <span className="font-display text-2xl font-bold text-mist">{formatPrice(product.price)}</span>
+        <span className="font-display text-2xl font-bold text-mist">{formatPrice(current.price)}</span>
         <button
           type="button"
           onClick={quickAdd}
@@ -98,7 +130,7 @@ export function ProductCard({ product }: { product: Product }) {
             'inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-all duration-200',
             added ? 'bg-mist text-ink' : 'bg-primary text-primary-foreground hover:brightness-110',
           )}
-          aria-label={`Add ${product.name} to cart`}
+          aria-label={`Add ${current.name} to cart`}
         >
           {added ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           {added ? 'Added' : 'Add'}
