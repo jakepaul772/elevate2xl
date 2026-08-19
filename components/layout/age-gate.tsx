@@ -6,9 +6,30 @@ import { LogoMark } from '@/components/brand/logo'
 
 const STORAGE_KEY = 'e2xl-age-verified'
 
+function calculateAge(dob: string): number | null {
+  if (!dob) return null
+  const birthDate = new Date(dob)
+  if (Number.isNaN(birthDate.getTime())) return null
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const m = today.getMonth() - birthDate.getMonth()
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--
+  }
+  return age
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
 export function AgeGate() {
   const [status, setStatus] = useState<'checking' | 'open' | 'closed'>('checking')
   const [denied, setDenied] = useState(false)
+  const [dob, setDob] = useState('')
+  const [email, setEmail] = useState('')
+  const [agreed, setAgreed] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     try {
@@ -31,8 +52,37 @@ export function AgeGate() {
   }, [status])
 
   function confirm() {
+    setError(null)
+
+    if (!dob) {
+      setError('Please enter your date of birth.')
+      return
+    }
+    if (!email || !isValidEmail(email)) {
+      setError('Please enter a valid email address.')
+      return
+    }
+    if (!agreed) {
+      setError('Please confirm the acknowledgement checkbox.')
+      return
+    }
+
+    const age = calculateAge(dob)
+    if (age === null) {
+      setError('Please enter a valid date of birth.')
+      return
+    }
+    if (age < 18) {
+      setDenied(true)
+      return
+    }
+
     try {
       localStorage.setItem(STORAGE_KEY, 'true')
+      localStorage.setItem(
+        `${STORAGE_KEY}-record`,
+        JSON.stringify({ email, dob, verifiedAt: new Date().toISOString() })
+      )
     } catch {
       // ignore
     }
@@ -75,21 +125,68 @@ export function AgeGate() {
                 You must be 18 or older to access this site.
               </p>
             ) : (
-              <div className="mt-7 flex flex-col gap-3">
-                <button
-                  type="button"
-                  onClick={confirm}
-                  className="glow-pink glow-pink-hover h-12 rounded-full bg-primary text-sm font-semibold text-primary-foreground"
-                >
-                  I am 18 or older — Enter
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDenied(true)}
-                  className="h-11 rounded-full border border-border text-sm font-medium text-muted-foreground transition-colors hover:text-mist"
-                >
-                  I am under 18
-                </button>
+              <div className="mt-7 flex flex-col gap-4 text-left">
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="age-gate-dob" className="text-xs font-medium text-muted-foreground">
+                    Date of birth
+                  </label>
+                  <input
+                    id="age-gate-dob"
+                    type="date"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    max={new Date().toISOString().split('T')[0]}
+                    className="h-11 rounded-lg border border-border bg-secondary/40 px-3 text-sm text-mist outline-none focus:border-primary"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="age-gate-email" className="text-xs font-medium text-muted-foreground">
+                    Email address
+                  </label>
+                  <input
+                    id="age-gate-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="h-11 rounded-lg border border-border bg-secondary/40 px-3 text-sm text-mist outline-none placeholder:text-muted-foreground/60 focus:border-primary"
+                  />
+                </div>
+
+                <label className="flex items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-border bg-secondary/40 accent-primary"
+                  />
+                  I confirm the information above is accurate, that I am 18 years of age or older, and that these
+                  products are not for human consumption.
+                </label>
+
+                {error && (
+                  <p role="alert" className="text-xs font-medium text-primary">
+                    {error}
+                  </p>
+                )}
+
+                <div className="mt-1 flex flex-col gap-3">
+                  <button
+                    type="button"
+                    onClick={confirm}
+                    className="glow-pink glow-pink-hover h-12 rounded-full bg-primary text-sm font-semibold text-primary-foreground"
+                  >
+                    Verify and Enter
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDenied(true)}
+                    className="h-11 rounded-full border border-border text-sm font-medium text-muted-foreground transition-colors hover:text-mist"
+                  >
+                    I am under 18
+                  </button>
+                </div>
               </div>
             )}
           </motion.div>
